@@ -1,0 +1,17 @@
+{
+    "restartable": "rs",
+    "ignore": [
+      ".git",
+      "node_modules/**/node_modules"
+    ],
+    "verbose": true,
+    "execMap": {
+      "js": "node --harmony"
+    },
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "watch": [".","src/","routes/","views/","bin/"],
+    "ext": "js,json,jade",
+    "exec": "node -r dotenv/config ./bin/www"
+}

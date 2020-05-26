@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  if user 
+    p 
+      span="select the action from the menu"  
+  else 
+    p 
+      a(href='/auth/adobe/login')
+        | Sign in with Adobe ID

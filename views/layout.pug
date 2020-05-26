@@ -1,0 +1,75 @@
+doctype html
+html
+  head
+    title Adobe I/O Playground
+    link(rel='stylesheet' href='/bootstrap/dist/css/bootstrap.css')
+    link(rel="stylesheet" href="/json-viewer/jquery.json-viewer.css" type="text/css" )
+    script(src='/jquery/dist/jquery.js')
+    script(src='/bootstrap/dist/js/bootstrap.js')
+    script(src='/json-viewer/jquery.json-viewer.js')
+  body
+    //- Navbar 
+    nav(class='navbar navbar-expand-lg navbar-light bg-light')
+      a(class="navbar-brand" href="/")='Adobe I/O Playground'
+      button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
+        span(class="navbar-toggler-icon")
+      if user
+        div(class="collapse navbar-collapse" id="navbarNav")
+          ul(class="navbar-nav mr-auto")
+            if user.email
+              li(class="nav-item")
+                span(class="navbar-text") (#{user.email})
+          from(class="form-inline")
+            a(class="btn btn-sm btn-outline-secondary" href="/logout" role="button")= 'Sign Out'
+      else
+        div(class="collapse navbar-collapse" id="navbarNav")
+          from(class="form-inline")
+            a(class="btn btn-sm btn-outline-secondary" href="/auth/adobe/login" role="button")= 'Sign In'
+      //- End of Navbar
+    div(class='container-fluid')
+      div(class="row")
+        //- SideMeenu
+        nav(class="col-md-2 d-none d-md-block bg-light sidebar")
+          div(class="sidebar-sticky")
+            h6(class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted")
+              a(class="d-flex align-items-center text-muted" href="#")="Account Info"
+            ul(class="nav flex-column")
+              if user
+                li(class="nav-item") 
+                  a(class= "nav-link text-muted" href="#") #{user.email}
+                li(class="nav-item")
+                  a(class="nav-link text-muted" href="#") #{user.displayName}
+              else
+                li(class="nav-item")
+                  a(class= "nav-link text-muted" href="#") Not Signeed In
+            //- Creative Cloud SDK requries to sign in to the app.
+            if user
+              if apiScopes.creative_sdk
+                h6(class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted")
+                  a(class="d-flex align-items-center text-muted" href="#")="Creative SDK"
+                ul(class="nav flex-column mb-2")
+                  li(class="nav-item")
+                    a(class="nav-link" href="/csdk/profile")="Profile"
+            //- Ligthroom CC requries to sign in to the app.
+            if user
+              if apiScopes.lr_partner_apis
+                h6(class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted")
+                  a(class="d-flex align-items-center text-muted" href="#")="Lightroom"
+                ul(class="nav flex-column mb-2")
+                  li(class="nav-item")
+                    a(class="nav-link" href="/lightroom/status")="Web Status"
+                  li(class="nav-item")
+                    a(class="nav-link" href="/lightroom/account")="Account"
+                  li(class="nav-item")
+                    a(class="nav-link" href="/lightroom/catalog")="Catalog"
+            //- XD Does not requried sign in to the app. (works without OAuth)
+            h6(class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted")
+              a(class="d-flex align-items-center text-muted" href="#")="XD"
+            ul(class="nav flex-column mb-2")
+                li(class="nav-item")
+                  a(class="nav-link" href="/xd/index")="Link"
+        //- End of SideMenu
+        //- Main Contents
+        main(role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4")
+          block content
+        //- End of Contents

@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  if host
+    h4 Host
+    p #{host}
+  if endpoint
+    h4 Endpoint
+    p #{endpoint}
+  if links
+    h4 Links
+    p
+      ul
+        for link in links
+          li
+            a(href=link.href) #{link.label}
+  if options
+    h4 Request Header Options
+    pre(id="json-options")
+    script!=`$('#json-options').jsonViewer(${options}, {collapsed: false, rootCollapsable: true, withQuotes: false, withLinks: true});`
+  if image
+      h4 Image
+      img(class="img-thumbnail img-fluid" src=`${image}`)
+  if headers
+    h4 Response headers
+    pre(id="json-headers")
+    script!=`$('#json-headers').jsonViewer(${headers}, {collapsed: false, rootCollapsable: true, withQuotes: false, withLinks: true});`
+  if response
+    h4 Response
+    pre(id="json-response")
+    script!=`$('#json-response').jsonViewer(${response}, {collapsed: false, rootCollapsable: true, withQuotes: false, withLinks: true});`
