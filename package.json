@@ -28,7 +28,7 @@
     "express": "~4.16.1",
     "express-session": "^1.17.0",
     "http-errors": "~1.6.3",
-    "http-proxy": "^1.18.0",
+    "http-proxy": "^1.18.1",
     "jquery": "^3.5.0",
     "jquery.json-viewer": "^1.4.0",
     "morgan": "~1.9.1",
